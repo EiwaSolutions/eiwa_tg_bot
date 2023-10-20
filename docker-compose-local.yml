@@ -1,0 +1,45 @@
+version: "3"
+services:
+  chatgpt-telegram-bot:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    volumes:
+      - .:/app
+    restart: unless-stopped
+
+  jupyter-scipy-notebook:
+    image: jupyter/scipy-notebook:2023-09-25
+    volumes:
+      - .:/home/jovyan/work
+    ports:
+      - "8889:8888"
+    restart: unless-stopped
+
+  pgvector-db:
+    image: ankane/pgvector
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_HOST_AUTH_METHOD: trust
+    ports:
+      - "5432:5432"
+    restart: on-failure
+    volumes:
+      - pgvector_data:/var/lib/postgresql/data/
+
+  pgadmin:
+    image: dpage/pgadmin4:latest
+    environment:
+      PGADMIN_DEFAULT_EMAIL: jumasheff@gmail.com
+      PGADMIN_DEFAULT_PASSWORD: 123
+    ports:
+      - "8088:80"
+    restart: unless-stopped
+    depends_on:
+      - pgvector-db
+    volumes:
+      - ./pgadmin_storage:/var/lib/pgadmin/storage
+
+volumes:
+  pgvector_data:

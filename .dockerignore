@@ -1,0 +1,11 @@
+# flyctl launch added from .gitignore
+**/__pycache__
+.idea
+**/.DS_Store
+usage_logs
+**/venv
+.cache
+fly.toml
+knowledge_base/.ipynb_checkpoints
+knowledge_base/*.pdf
+pgadmin_storage/

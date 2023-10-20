@@ -1,0 +1,15 @@
+__pycache__
+/.idea
+.env
+.DS_Store
+/usage_logs
+venv
+/.cache
+.ipython
+.local
+.npm/
+.jupyter/
+knowledge_base/.ipynb_checkpoints
+pgadmin_storage/
+*.pdf
+knowledge_base/test_embeddings_storing_in_db.ipynb
